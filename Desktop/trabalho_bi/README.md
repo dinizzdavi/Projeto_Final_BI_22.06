@@ -5,7 +5,7 @@
 **Professor:** MsC Pedro H. Mello  
 **Empresa Estudada:** Grupo Celnet (Agente Autorizado Claro - Planaltina/DF)
 
----
+--
 
 ## 🚀 Sobre o Projeto
 Este repositório contém a solução de Business Intelligence desenvolvida para o Grupo Celnet. O objetivo principal é transformar os dados manuais de ativações celulares em um ecossistema analítico automatizado (*Data-Driven*), focando no controle de descontos, monitoramento de margem de lucro e eficiência no processo de auditoria de vendas.
