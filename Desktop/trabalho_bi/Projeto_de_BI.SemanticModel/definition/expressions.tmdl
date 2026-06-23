@@ -1,0 +1,23 @@
+expression 'Erros em Março e Abril - Controle Celular' =
+		let
+		Fonte = #"Março e Abril - Controle Celular",
+		  #"Incompatibilidades de Tipo Detectadas" = let
+		    tableWithOnlyPrimitiveTypes = Table.SelectColumns(Fonte, Table.ColumnsOfType(Fonte, {type nullable number, type nullable text, type nullable logical, type nullable date, type nullable datetime, type nullable datetimezone, type nullable time, type nullable duration})),
+		    recordTypeFields = Type.RecordFields(Type.TableRow(Value.Type(tableWithOnlyPrimitiveTypes))),
+		    fieldNames = Record.FieldNames(recordTypeFields),
+		    fieldTypes = List.Transform(Record.ToList(recordTypeFields), each [Type]),
+		    pairs = List.Transform(List.Positions(fieldNames), (i) => {fieldNames{i}, (v) => if v = null or Value.Is(v, fieldTypes{i}) then v else error [Message = "O tipo do valor não corresponde ao tipo da coluna.", Detail = v], fieldTypes{i}})
+		in
+		    Table.TransformColumns(Fonte, pairs),
+		  #"Índice Adicionado" = Table.AddIndexColumn(#"Incompatibilidades de Tipo Detectadas", "Número da Linha" ,1),
+		  #"Erros Mantidos" = Table.SelectRowsWithErrors(#"Índice Adicionado", {"Cod Loja", "Loja (Venda)", "Atend", "CPF", "Data", "Tipo de Ativacao", "Plano Servico", "NTC", "NTC Provisorio", "Operadora", "ICCID", "IMEI", "Descricao do Produto", "Valor Venda", "Desconto Total", "Desconto 1", "Motivo", "Protocolo", "Desconto 2", "Motivo_1", "Protocolo 2", "Desconto 3", "Motivo 3", "Protocolo 3", "Autorizado Por", "Valor Tabela", "Tabela", "Data Tabela", "Vendedor", "Numero NF", "Mod", "Area Cabeada", "Combo", "Contrato", "Protocolo ", "Tipo Cliente", "Margem", "%", "Custo Compra", "Rebate", "Adicional Cartao", "Valor Cartao", "Par", "Comissao", "Comissao Res", "Dt Entrada", "NF Entrada", "A F", "Protocolo GED", "Status GED", "Situacao Residencial", "Dt Instalacao", "Promocao", "Acao de Marketing", "Assinatura", "Plano Anterior", "A/F Ant", "Assinatura Ant", "Delta", "Aceite por Voz", "Valor Pre", "Acrescimo", "Plano do Titular", "Loja (Compra)", "1 Vencimento", "email Cliente", "Canal de Vendas", "Oferta", "Status da Auditoria", "CC", "CR", "Franquia Total", "Lancamento", "Sistema da Claro"}),
+		  #"Colunas Reordenadas" = Table.ReorderColumns(#"Erros Mantidos", {"Número da Linha", "Cod Loja", "Loja (Venda)", "Atend", "CPF", "Data", "Tipo de Ativacao", "Plano Servico", "NTC", "NTC Provisorio", "Operadora", "ICCID", "IMEI", "Descricao do Produto", "Valor Venda", "Desconto Total", "Desconto 1", "Motivo", "Protocolo", "Desconto 2", "Motivo_1", "Protocolo 2", "Desconto 3", "Motivo 3", "Protocolo 3", "Autorizado Por", "Valor Tabela", "Tabela", "Data Tabela", "Vendedor", "Numero NF", "Mod", "Area Cabeada", "Combo", "Contrato", "Protocolo ", "Tipo Cliente", "Margem", "%", "Custo Compra", "Rebate", "Adicional Cartao", "Valor Cartao", "Par", "Comissao", "Comissao Res", "Dt Entrada", "NF Entrada", "A F", "Protocolo GED", "Status GED", "Situacao Residencial", "Dt Instalacao", "Promocao", "Acao de Marketing", "Assinatura", "Plano Anterior", "A/F Ant", "Assinatura Ant", "Delta", "Aceite por Voz", "Valor Pre", "Acrescimo", "Plano do Titular", "Loja (Compra)", "1 Vencimento", "email Cliente", "Canal de Vendas", "Oferta", "Status da Auditoria", "CC", "CR", "Franquia Total", "Lancamento", "Sistema da Claro"})
+		in
+		  #"Colunas Reordenadas"
+	lineageTag: bd616fb0-ddcc-4f60-87ce-6d768aba4d3e
+	queryGroup: 'Erros na Consulta - 22/06/2026 22:06:34'
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

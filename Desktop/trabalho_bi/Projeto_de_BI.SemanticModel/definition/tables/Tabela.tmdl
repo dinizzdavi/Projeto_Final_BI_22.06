@@ -1,0 +1,90 @@
+table Tabela
+	lineageTag: 12d15f90-2edd-47ac-a8f1-3849c6e4852c
+
+	measure 'Receita Total' = SUM(Fato_Vendas[Valor Venda])
+		formatString: "R$"#,0.###############;-"R$"#,0.###############;"R$"#,0.###############
+		lineageTag: f37d5e62-739e-4a0e-a2f9-b1e501319f72
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Margem Total' = SUM(Fato_Vendas[Margem])
+		formatString: "R$"#,0.###############;-"R$"#,0.###############;"R$"#,0.###############
+		lineageTag: d19ec11f-1df1-4114-86d4-b6aa62ab1904
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Comissao Total' = SUM(Fato_Vendas[Comissao])
+		formatString: "R$"#,0.###############;-"R$"#,0.###############;"R$"#,0.###############
+		lineageTag: 41a39d47-726d-49ee-80bc-14853c78d8cc
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Volume Ativacoes' = COUNTROWS(Fato_Vendas)
+		formatString: 0
+		lineageTag: 8fdb0ea7-82e0-4885-ba67-4920ab219e61
+
+	measure 'Ticket Medio' = DIVIDE([Receita Total], [Volume Ativacoes], 0)
+		formatString: "R$"#,0.###############;-"R$"#,0.###############;"R$"#,0.###############
+		lineageTag: f4cc3b1e-16da-4d04-8e23-63af135df8d3
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Receita MTD' = TOTALMTD([Receita Total], Dim_Calendario[Date])
+		formatString: "R$"#,0.###############;-"R$"#,0.###############;"R$"#,0.###############
+		lineageTag: 8395b035-4269-4909-bded-54fdda6f4fe5
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Receita Mes Anterior' = CALCULATE([Receita Total], PREVIOUSMONTH(Dim_Calendario[Date]))
+		formatString: "R$"#,0.###############;-"R$"#,0.###############;"R$"#,0.###############
+		lineageTag: 0c051a75-eac2-4f8f-8af5-02d7e8b5119f
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Variacao MoM Receita' = [Receita Total] - [Receita Mes Anterior]
+		formatString: "R$"#,0.###############;-"R$"#,0.###############;"R$"#,0.###############
+		lineageTag: fc696dd9-f624-4afd-b5bb-b97cf59c9a65
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure '// Calcula o faturamento vindo especificamente de troca de aparelhos celularesReceita Troca Aparelho' = CALCULATE([Receita Total], Dim_Produtos[Tipo de Ativacao] = "Troca de Aparelho")
+		formatString: "R$"#,0.###############;-"R$"#,0.###############;"R$"#,0.###############
+		lineageTag: 8396bae0-a832-4b93-b3ef-dfa970d8f093
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure '// Filtra vendas do canal focado em parcerias e indicações (citado nos POPs)Receita Canal Indicacao' = CALCULATE([Receita Total], Dim_Vendedores[Canal de Vendas] = "Indicação")
+		formatString: "R$"#,0.###############;-"R$"#,0.###############;"R$"#,0.###############
+		lineageTag: adb73ef5-92b9-4103-b777-86ce63e33915
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure '// Percentual de lucratividade real da operação sobre as vendas% Margem Lucro' = DIVIDE([Margem Total], [Receita Total], 0)
+		lineageTag: 57728740-cf6d-4d80-b1f5-e26d50080464
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '// Medida para acompanhar a eficiência das vendas auditadas e aprovadasAtivacoes Auditadas OK' = CALCULATE([Volume Ativacoes], Fato_Vendas[Status da Auditoria] = "Auditoria - Operação OK")
+		lineageTag: a6426485-f6b6-4027-83e0-3e1aeebd1f6e
+
+	column 'Coluna 1'
+		dataType: string
+		lineageTag: 41d5ca98-7410-4778-8b4c-7b60a60cb20c
+		summarizeBy: none
+		sourceColumn: Coluna 1
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Tabela = m
+		mode: import
+		source =
+				let
+				    Fonte = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Coluna 1" = _t]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"Coluna 1", type text}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

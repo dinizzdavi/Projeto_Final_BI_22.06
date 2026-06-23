@@ -1,0 +1,7 @@
+role 'Gerente Aguas Claras'
+	modelPermission: read
+
+	tablePermission Dim_Lojas = [Loja (Venda)] = "CELNET AGUAS CLARA"
+
+	annotation PBI_Id = 320e856002994bfabe01ff9c1f64f711
+

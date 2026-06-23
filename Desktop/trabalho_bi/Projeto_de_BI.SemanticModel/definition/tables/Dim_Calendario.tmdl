@@ -1,0 +1,77 @@
+table Dim_Calendario
+	lineageTag: 974223dc-1119-4602-ab21-0530eb311beb
+
+	column Date
+		formatString: General Date
+		lineageTag: a93ee06b-e771-411e-be63-cf94ec0c4442
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		variation Variation
+			isDefault
+			relationship: 4ea3f3cb-b8a1-4178-bef6-cefd1f979485
+			defaultHierarchy: LocalDateTable_53a1f69e-71d4-4457-857a-41daa14a3a54.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ano
+		formatString: 0
+		lineageTag: 41de3dab-af96-4720-b3af-44e1bea3ecf7
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Ano]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mes Num'
+		formatString: 0
+		lineageTag: 0d3edeb8-72b9-45ad-acea-b095e9e3cfe3
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Mes Num]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nome Mes'
+		lineageTag: 33b72d78-459b-437e-b17b-65823898f3b0
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Nome Mes]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Trimestre
+		lineageTag: bcdc0acd-b0f2-4e3d-bfb6-ab8fe1307cb5
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Trimestre]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ano Mes'
+		lineageTag: 15029fd7-0311-4e32-82bd-35268b3aba3b
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Ano Mes]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_Calendario = calculated
+		mode: import
+		source =
+				
+				VAR DataMinima = MIN(Fato_Vendas[Data])
+				VAR DataMaxima = MAX(Fato_Vendas[Data])
+				RETURN
+				ADDCOLUMNS (
+				    CALENDAR (DataMinima, DataMaxima),
+				    "Ano", YEAR ( [Date] ),
+				    "Mes Num", MONTH ( [Date] ),
+				    "Nome Mes", FORMAT ( [Date], "MMMM", "pt-BR" ),
+				    "Trimestre", "T" & QUARTER ( [Date] ),
+				    "Ano Mes", FORMAT ( [Date], "YYYY-MM" )
+				)
+
+	annotation PBI_Id = 22b0b9689c8a4763b2389f99bd3e804b
+

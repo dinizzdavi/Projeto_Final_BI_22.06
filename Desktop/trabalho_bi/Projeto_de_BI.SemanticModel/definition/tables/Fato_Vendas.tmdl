@@ -1,0 +1,131 @@
+table Fato_Vendas
+	lineageTag: 4ca55bde-cfdb-4d7e-a64b-aa60c7a41919
+
+	column 'Cod Loja'
+		dataType: string
+		lineageTag: 520d0c63-2dc0-4cdb-8ca1-6511b11fe565
+		summarizeBy: none
+		sourceColumn: Cod Loja
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Descricao do Produto'
+		dataType: string
+		lineageTag: 18c82ff1-609d-41b8-a691-0e2f87607b9b
+		summarizeBy: none
+		sourceColumn: Descricao do Produto
+
+		annotation SummarizationSetBy = Automatic
+
+	column CPF
+		dataType: string
+		lineageTag: d6a7445c-e82b-444a-8a6e-f6301dd76bbf
+		summarizeBy: none
+		sourceColumn: CPF
+
+		annotation SummarizationSetBy = Automatic
+
+	column Data
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 584b0d83-c237-4666-99f6-47e9958e3ea9
+		summarizeBy: none
+		sourceColumn: Data
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Vendedor
+		dataType: string
+		lineageTag: 1c914478-d409-4e84-bd3c-7a165996e126
+		summarizeBy: none
+		sourceColumn: Vendedor
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Valor Venda'
+		dataType: decimal
+		formatString: "R$"#,0.###############;-"R$"#,0.###############;"R$"#,0.###############
+		lineageTag: 75dd81b2-5fdd-4ffd-bc7e-6a42d123a3db
+		summarizeBy: sum
+		sourceColumn: Valor Venda
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column 'Desconto Total'
+		dataType: decimal
+		formatString: "R$"#,0.###############;-"R$"#,0.###############;"R$"#,0.###############
+		lineageTag: 3c0cabe6-9d7e-4aa7-a294-a8a54e4208cb
+		summarizeBy: sum
+		sourceColumn: Desconto Total
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column Margem
+		dataType: decimal
+		formatString: "R$"#,0.###############;-"R$"#,0.###############;"R$"#,0.###############
+		lineageTag: 181785d1-f90e-422e-b02d-35526bd1db74
+		summarizeBy: sum
+		sourceColumn: Margem
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column 'Custo Compra'
+		dataType: decimal
+		formatString: "R$"#,0.###############;-"R$"#,0.###############;"R$"#,0.###############
+		lineageTag: 948ad6a8-31f6-44cc-b356-ec31c30128d7
+		summarizeBy: sum
+		sourceColumn: Custo Compra
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column Comissao
+		dataType: decimal
+		formatString: "R$"#,0.###############;-"R$"#,0.###############;"R$"#,0.###############
+		lineageTag: b121b20d-ca24-4d20-83fe-cf151dd21a53
+		summarizeBy: sum
+		sourceColumn: Comissao
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column 'Status da Auditoria'
+		dataType: string
+		lineageTag: a612991b-2ded-4717-ac56-7a4729015d18
+		summarizeBy: none
+		sourceColumn: Status da Auditoria
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Fato_Vendas = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("C:\Users\djmar\Downloads\Março e Abril - Controle Celular.csv"),[Delimiter=";", Columns=74, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Cód Loja", type text}, {"Loja (Venda)", type text}, {"Atend", Int64.Type}, {"CPF", type text}, {"Data", type date}, {"Tipo de Ativação", type text}, {"Plano/Serviço", type text}, {"NTC", Int64.Type}, {"NTC Provisório", Int64.Type}, {"Operadora", type text}, {"ICCID", type number}, {"IMEI", Int64.Type}, {"Descrição do Produto", type text}, {"Valor Venda", type number}, {"Desconto Total", type number}, {"Desconto 1", type number}, {"Motivo", type text}, {"Protocolo", type text}, {"Desconto 2", Int64.Type}, {"Motivo_1", type text}, {"Protocolo 2", Int64.Type}, {"Desconto 3", Int64.Type}, {"Motivo 3", type text}, {"Protocolo 3", type text}, {"Autorizado Por", type text}, {"Valor Tabela", Int64.Type}, {"Tabela", type text}, {"Data Tabela", type date}, {"Vendedor", type text}, {"Número NF", Int64.Type}, {"Mod", type text}, {"Area Cabeada", type text}, {"Combo", type text}, {"Contrato", Int64.Type}, {"Protocolo ", Int64.Type}, {"Tipo Cliente", type text}, {"Margem", type number}, {"%", Int64.Type}, {"Custo Compra", Int64.Type}, {"Rebate", type number}, {"Adicional Cartão", type number}, {"Valor Cartão", type number}, {"Par", Int64.Type}, {"Comissão", type number}, {"Comissão Res", Currency.Type}, {"Dt Entrada", type date}, {"NF Entrada", Int64.Type}, {"A/F", type text}, {"Protocolo GED", Int64.Type}, {"Status GED", type text}, {"Situação Residencial", type text}, {"Dt Instalação", type date}, {"Promoção", type text}, {"Ação de Marketing", type text}, {"Assinatura", type number}, {"Plano Anterior", type text}, {"A/F Ant", type text}, {"Assinatura Ant", type number}, {"Delta", type number}, {"Aceite por Voz", type text}, {"Valor Pré", Int64.Type}, {"Acréscimo", type number}, {"Plano do Titular", type text}, {"Loja (Compra)", type text}, {"1º Vencimento", type date}, {"e-mail Cliente", type text}, {"Canal de Vendas", type text}, {"Oferta", type text}, {"Status da Auditoria", type text}, {"CC", type text}, {"CR", type text}, {"Franquia Total", type number}, {"Lançamento", type datetime}, {"Sistema da Claro", type text}}),
+				    #"Dividir Coluna por Delimitador" = Table.SplitColumn(#"Tipo Alterado", "CPF", Splitter.SplitTextByEachDelimiter({"."}, QuoteStyle.Csv, false), {"CPF.1", "CPF.2"}),
+				    #"Colunas Renomeadas" = Table.RenameColumns(#"Dividir Coluna por Delimitador",{{"CPF.2", "CPF"}}),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Colunas Renomeadas",{"CPF.1"}),
+				    #"Linhas Filtradas" = Table.SelectRows(#"Colunas Removidas", each true),
+				    #"Outras Colunas Removidas" = Table.SelectColumns(#"Linhas Filtradas",{"Cód Loja", "CPF", "Data", "Descrição do Produto", "Valor Venda", "Desconto Total", "Vendedor", "Margem", "Custo Compra", "Comissão", "Status da Auditoria"}),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Outras Colunas Removidas",{{"Valor Venda", Currency.Type}, {"Desconto Total", Currency.Type}, {"Margem", Currency.Type}, {"Custo Compra", Currency.Type}, {"Comissão", Currency.Type}}),
+				    #"Colunas Renomeadas1" = Table.RenameColumns(#"Tipo Alterado1",{{"Cód Loja", "Cod Loja"}, {"Descrição do Produto", "Descricao do Produto"}, {"Comissão", "Comissao"}}),
+				    #"Duplicatas Removidas" = Table.Distinct(#"Colunas Renomeadas1", {"CPF"})
+				in
+				    #"Duplicatas Removidas"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

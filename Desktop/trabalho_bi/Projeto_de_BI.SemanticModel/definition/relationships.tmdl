@@ -1,0 +1,55 @@
+relationship 94df3a83-3898-4be7-91db-a7c6e3bd614a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Março e Abril - Controle Celular'.Data
+	toColumn: LocalDateTable_04794417-9e17-4ad3-8a0a-a148f5fb0dec.Date
+
+relationship 6548a464-5651-4a53-9941-dc8ec3a2161c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Março e Abril - Controle Celular'.'Data Tabela'
+	toColumn: LocalDateTable_6dd508da-3eee-4d96-b895-2b50f7808c5c.Date
+
+relationship 22084b53-bdb3-497d-97b1-a72521092f5c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Março e Abril - Controle Celular'.'Dt Entrada'
+	toColumn: LocalDateTable_b3a06010-ad04-4b1e-bf03-aec824f2bc17.Date
+
+relationship f458f89c-508d-4983-ab67-154504583a5a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Março e Abril - Controle Celular'.'Dt Instalacao'
+	toColumn: LocalDateTable_8d18eba0-5556-4518-b698-794c5d95aebd.Date
+
+relationship afd4521f-04a9-4b75-8789-0d8bb688587c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Março e Abril - Controle Celular'.'1 Vencimento'
+	toColumn: LocalDateTable_75ec384e-37c2-4454-ad4b-2d9265c6b066.Date
+
+relationship f9763008-71cc-44ad-a32f-f5b3cdd0a999
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Março e Abril - Controle Celular'.Lancamento
+	toColumn: LocalDateTable_0251fe22-3ff5-4f52-8d55-0122768d07cb.Date
+
+relationship 4ea3f3cb-b8a1-4178-bef6-cefd1f979485
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Dim_Calendario.Date
+	toColumn: LocalDateTable_53a1f69e-71d4-4457-857a-41daa14a3a54.Date
+
+relationship c8f78f46-6dd5-6c01-3429-455a26a397c5
+	fromColumn: Fato_Vendas.'Cod Loja'
+	toColumn: Dim_Lojas.'Cod Loja'
+
+relationship 28805c2b-6776-e974-de53-7d6c18b1ed19
+	fromColumn: Fato_Vendas.Vendedor
+	toColumn: Dim_Vendedores.Vendedor
+
+relationship a09ed970-1c06-4af5-2955-4837ba8a9a16
+	fromColumn: Fato_Vendas.'Descricao do Produto'
+	toColumn: Dim_Produtos.'Descricao do Produto'
+
+relationship 1da899ca-e615-fe4d-61b6-c8dc092feff4
+	fromColumn: Fato_Vendas.CPF
+	toColumn: Dim_Clientes.CPF
+
+relationship 7a6c4ffb-9948-68b1-03ce-69d268e980ec
+	fromColumn: Fato_Vendas.Data
+	toColumn: Dim_Calendario.Date
+

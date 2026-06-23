@@ -1,0 +1,49 @@
+table Dim_Clientes
+	lineageTag: e5562f90-1d62-4102-8c85-4a505e10b111
+
+	column CPF
+		dataType: string
+		lineageTag: 4453631c-b47c-42b5-b1f3-7fc49b5d7369
+		summarizeBy: none
+		sourceColumn: CPF
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'email Cliente'
+		dataType: string
+		lineageTag: d183559b-d965-429f-a96e-ab8a1424e2cb
+		summarizeBy: none
+		sourceColumn: email Cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tipo Cliente'
+		dataType: string
+		lineageTag: 45a64731-6cd6-48a5-a3e8-8a78dff31b9b
+		summarizeBy: none
+		sourceColumn: Tipo Cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_Clientes = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("C:\Users\djmar\Downloads\Março e Abril - Controle Celular.csv"),[Delimiter=";", Columns=74, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Cód Loja", type text}, {"Loja (Venda)", type text}, {"Atend", Int64.Type}, {"CPF", type text}, {"Data", type date}, {"Tipo de Ativação", type text}, {"Plano/Serviço", type text}, {"NTC", Int64.Type}, {"NTC Provisório", Int64.Type}, {"Operadora", type text}, {"ICCID", type number}, {"IMEI", Int64.Type}, {"Descrição do Produto", type text}, {"Valor Venda", type number}, {"Desconto Total", type number}, {"Desconto 1", type number}, {"Motivo", type text}, {"Protocolo", type text}, {"Desconto 2", Int64.Type}, {"Motivo_1", type text}, {"Protocolo 2", Int64.Type}, {"Desconto 3", Int64.Type}, {"Motivo 3", type text}, {"Protocolo 3", type text}, {"Autorizado Por", type text}, {"Valor Tabela", Int64.Type}, {"Tabela", type text}, {"Data Tabela", type date}, {"Vendedor", type text}, {"Número NF", Int64.Type}, {"Mod", type text}, {"Area Cabeada", type text}, {"Combo", type text}, {"Contrato", Int64.Type}, {"Protocolo ", Int64.Type}, {"Tipo Cliente", type text}, {"Margem", type number}, {"%", Int64.Type}, {"Custo Compra", Int64.Type}, {"Rebate", type number}, {"Adicional Cartão", type number}, {"Valor Cartão", type number}, {"Par", Int64.Type}, {"Comissão", type number}, {"Comissão Res", Currency.Type}, {"Dt Entrada", type date}, {"NF Entrada", Int64.Type}, {"A/F", type text}, {"Protocolo GED", Int64.Type}, {"Status GED", type text}, {"Situação Residencial", type text}, {"Dt Instalação", type date}, {"Promoção", type text}, {"Ação de Marketing", type text}, {"Assinatura", type number}, {"Plano Anterior", type text}, {"A/F Ant", type text}, {"Assinatura Ant", type number}, {"Delta", type number}, {"Aceite por Voz", type text}, {"Valor Pré", Int64.Type}, {"Acréscimo", type number}, {"Plano do Titular", type text}, {"Loja (Compra)", type text}, {"1º Vencimento", type date}, {"e-mail Cliente", type text}, {"Canal de Vendas", type text}, {"Oferta", type text}, {"Status da Auditoria", type text}, {"CC", type text}, {"CR", type text}, {"Franquia Total", type number}, {"Lançamento", type datetime}, {"Sistema da Claro", type text}}),
+				    #"Dividir Coluna por Delimitador" = Table.SplitColumn(#"Tipo Alterado", "CPF", Splitter.SplitTextByEachDelimiter({"."}, QuoteStyle.Csv, false), {"CPF.1", "CPF.2"}),
+				    #"Colunas Renomeadas" = Table.RenameColumns(#"Dividir Coluna por Delimitador",{{"CPF.2", "CPF"}}),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Colunas Renomeadas",{"CPF.1"}),
+				    #"Linhas Filtradas" = Table.SelectRows(#"Colunas Removidas", each true),
+				    #"Outras Colunas Removidas" = Table.SelectColumns(#"Linhas Filtradas",{"CPF", "e-mail Cliente", "Tipo Cliente"}),
+				    #"Duplicatas Removidas" = Table.Distinct(#"Outras Colunas Removidas", {"CPF"}),
+				    #"Colunas Renomeadas1" = Table.RenameColumns(#"Duplicatas Removidas",{{"e-mail Cliente", "email Cliente"}}),
+				    #"Linhas Filtradas1" = Table.SelectRows(#"Colunas Renomeadas1", each [CPF] <> null and [CPF] <> "")
+				in
+				    #"Linhas Filtradas1"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

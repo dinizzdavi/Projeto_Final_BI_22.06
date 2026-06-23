@@ -1,0 +1,5 @@
+role Direcao
+	modelPermission: read
+
+	annotation PBI_Id = df562b19a4584ce8afcc8d5018a2f221
+

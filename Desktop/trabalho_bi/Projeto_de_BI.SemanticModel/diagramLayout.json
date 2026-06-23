@@ -1,0 +1,126 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 607,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 763.94043609321989,
+            "y": 448.61764005350676
+          },
+          "nodeIndex": "Dim_Clientes",
+          "nodeLineageTag": "e5562f90-1d62-4102-8c85-4a505e10b111",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 985.94043609321989,
+            "y": 0
+          },
+          "nodeIndex": "Dim_Lojas",
+          "nodeLineageTag": "8761454c-d937-4b89-9d7d-3cec72f8b2b8",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 196.75091071175581,
+            "y": 0
+          },
+          "nodeIndex": "Dim_Produtos",
+          "nodeLineageTag": "c88fd276-ca0b-4681-8917-cc99644ff8e7",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 452.17269601125224,
+            "y": 474.23528010701358
+          },
+          "nodeIndex": "Dim_Vendedores",
+          "nodeLineageTag": "562d8daf-d9e7-43fd-a613-6e09775acbf8",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 619,
+            "y": 0
+          },
+          "nodeIndex": "Fato_Vendas",
+          "nodeLineageTag": "4ca55bde-cfdb-4d7e-a64b-aa60c7a41919",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 148.94043609321989,
+            "y": 239.82476067969571
+          },
+          "nodeIndex": "Março e Abril - Controle Celular",
+          "nodeLineageTag": "7e0f7773-90a5-4da1-82b1-225c1ad21aa0",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 985.94043609321989,
+            "y": 193.61764005350676
+          },
+          "nodeIndex": "Dim_Calendario",
+          "nodeLineageTag": "974223dc-1119-4602-ab21-0530eb311beb",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 1121,
+            "y": 249.11764005350676
+          },
+          "nodeIndex": "Tabela",
+          "nodeLineageTag": "12d15f90-2edd-47ac-a8f1-3849c6e4852c",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Todas as tabelas",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Todas as tabelas",
+  "defaultDiagram": "Todas as tabelas"
+}

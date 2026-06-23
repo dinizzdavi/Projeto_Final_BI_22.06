@@ -1,0 +1,233 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "80eb726e9b830b1d7584",
+  "position": {
+    "x": 0,
+    "y": 55.433070866141733,
+    "z": 0,
+    "height": 339.31758530183725,
+    "width": 1280,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fato_Vendas"
+                    }
+                  },
+                  "Property": "Data"
+                }
+              },
+              "queryRef": "Fato_Vendas.Data",
+              "nativeQueryRef": "Data"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Dim_Produtos"
+                    }
+                  },
+                  "Property": "Descricao do Produto"
+                }
+              },
+              "queryRef": "Dim_Produtos.Descricao do Produto",
+              "nativeQueryRef": "Descricao do Produto"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Dim_Produtos"
+                    }
+                  },
+                  "Property": "Plano Servico"
+                }
+              },
+              "queryRef": "Dim_Produtos.Plano Servico",
+              "nativeQueryRef": "Plano Servico"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Fato_Vendas"
+                        }
+                      },
+                      "Property": "Valor Venda"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(Fato_Vendas.Valor Venda)",
+              "nativeQueryRef": "Soma de Valor Venda"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Fato_Vendas"
+                        }
+                      },
+                      "Property": "Desconto Total"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(Fato_Vendas.Desconto Total)",
+              "nativeQueryRef": "Soma de Desconto Total"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fato_Vendas"
+                    }
+                  },
+                  "Property": "Status da Auditoria"
+                }
+              },
+              "queryRef": "Fato_Vendas.Status da Auditoria",
+              "nativeQueryRef": "Status da Auditoria"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Dim_Produtos"
+                  }
+                },
+                "Property": "Plano Servico"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "ac6008655550374c043e",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Fato_Vendas"
+              }
+            },
+            "Property": "Data"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "1512119e002169c7e2b0",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Dim_Produtos"
+              }
+            },
+            "Property": "Descricao do Produto"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "2cf6c9cd0eba0d3c6770",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Dim_Produtos"
+              }
+            },
+            "Property": "Plano Servico"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "edc6fa8580c93824450d",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Fato_Vendas"
+                  }
+                },
+                "Property": "Valor Venda"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "2205d1d465c4253ea03a",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Fato_Vendas"
+                  }
+                },
+                "Property": "Desconto Total"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "160dc9a000e2257d58c1",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Fato_Vendas"
+              }
+            },
+            "Property": "Status da Auditoria"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+table Dim_Lojas
+	lineageTag: 8761454c-d937-4b89-9d7d-3cec72f8b2b8
+
+	column 'Cod Loja'
+		dataType: string
+		lineageTag: b25baf63-fb8d-4b3e-af4f-cd0157e12773
+		summarizeBy: none
+		sourceColumn: Cod Loja
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Loja (Venda)'
+		dataType: string
+		lineageTag: 7e27ece5-81a0-48c2-a5ca-cd0517fd139e
+		summarizeBy: none
+		sourceColumn: Loja (Venda)
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_Lojas = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("C:\Users\djmar\Downloads\Março e Abril - Controle Celular.csv"),[Delimiter=";", Columns=74, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Cód Loja", type text}, {"Loja (Venda)", type text}, {"Atend", Int64.Type}, {"CPF", type text}, {"Data", type date}, {"Tipo de Ativação", type text}, {"Plano/Serviço", type text}, {"NTC", Int64.Type}, {"NTC Provisório", Int64.Type}, {"Operadora", type text}, {"ICCID", type number}, {"IMEI", Int64.Type}, {"Descrição do Produto", type text}, {"Valor Venda", type number}, {"Desconto Total", type number}, {"Desconto 1", type number}, {"Motivo", type text}, {"Protocolo", type text}, {"Desconto 2", Int64.Type}, {"Motivo_1", type text}, {"Protocolo 2", Int64.Type}, {"Desconto 3", Int64.Type}, {"Motivo 3", type text}, {"Protocolo 3", type text}, {"Autorizado Por", type text}, {"Valor Tabela", Int64.Type}, {"Tabela", type text}, {"Data Tabela", type date}, {"Vendedor", type text}, {"Número NF", Int64.Type}, {"Mod", type text}, {"Area Cabeada", type text}, {"Combo", type text}, {"Contrato", Int64.Type}, {"Protocolo ", Int64.Type}, {"Tipo Cliente", type text}, {"Margem", type number}, {"%", Int64.Type}, {"Custo Compra", Int64.Type}, {"Rebate", type number}, {"Adicional Cartão", type number}, {"Valor Cartão", type number}, {"Par", Int64.Type}, {"Comissão", type number}, {"Comissão Res", Currency.Type}, {"Dt Entrada", type date}, {"NF Entrada", Int64.Type}, {"A/F", type text}, {"Protocolo GED", Int64.Type}, {"Status GED", type text}, {"Situação Residencial", type text}, {"Dt Instalação", type date}, {"Promoção", type text}, {"Ação de Marketing", type text}, {"Assinatura", type number}, {"Plano Anterior", type text}, {"A/F Ant", type text}, {"Assinatura Ant", type number}, {"Delta", type number}, {"Aceite por Voz", type text}, {"Valor Pré", Int64.Type}, {"Acréscimo", type number}, {"Plano do Titular", type text}, {"Loja (Compra)", type text}, {"1º Vencimento", type date}, {"e-mail Cliente", type text}, {"Canal de Vendas", type text}, {"Oferta", type text}, {"Status da Auditoria", type text}, {"CC", type text}, {"CR", type text}, {"Franquia Total", type number}, {"Lançamento", type datetime}, {"Sistema da Claro", type text}}),
+				    #"Dividir Coluna por Delimitador" = Table.SplitColumn(#"Tipo Alterado", "CPF", Splitter.SplitTextByEachDelimiter({"."}, QuoteStyle.Csv, false), {"CPF.1", "CPF.2"}),
+				    #"Colunas Renomeadas" = Table.RenameColumns(#"Dividir Coluna por Delimitador",{{"CPF.2", "CPF"}}),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Colunas Renomeadas",{"CPF.1"}),
+				    #"Linhas Filtradas" = Table.SelectRows(#"Colunas Removidas", each true),
+				    #"Outras Colunas Removidas" = Table.SelectColumns(#"Linhas Filtradas",{"Cód Loja", "Loja (Venda)"}),
+				    #"Duplicatas Removidas" = Table.Distinct(#"Outras Colunas Removidas"),
+				    #"Erros Removidos" = Table.RemoveRowsWithErrors(#"Duplicatas Removidas", {"Cód Loja"}),
+				    #"Colunas Renomeadas1" = Table.RenameColumns(#"Erros Removidos",{{"Cód Loja", "Cod Loja"}}),
+				    #"Duplicatas Removidas1" = Table.Distinct(#"Colunas Renomeadas1", {"Cod Loja"})
+				in
+				    #"Duplicatas Removidas1"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

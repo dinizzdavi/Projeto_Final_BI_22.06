@@ -1,0 +1,74 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "4c988ae8740c0dc4aeb2",
+  "position": {
+    "x": 0,
+    "y": 374.15384615384613,
+    "z": 3,
+    "height": 188.71794871794873,
+    "width": 316.71794871794873,
+    "tabOrder": 3
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Tabela"
+                    }
+                  },
+                  "Property": "// Percentual de lucratividade real da operação sobre as vendas% Margem Lucro"
+                }
+              },
+              "queryRef": "Tabela.// Percentual de lucratividade real da operação sobre as vendas% Margem Lucro",
+              "nativeQueryRef": "// Percentual de lucratividade real da operação sobre as vendas% Margem Lucro"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Tabela"
+                  }
+                },
+                "Property": "// Percentual de lucratividade real da operação sobre as vendas% Margem Lucro"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "838321b675d3ace0d18d",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Tabela"
+              }
+            },
+            "Property": "// Percentual de lucratividade real da operação sobre as vendas% Margem Lucro"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

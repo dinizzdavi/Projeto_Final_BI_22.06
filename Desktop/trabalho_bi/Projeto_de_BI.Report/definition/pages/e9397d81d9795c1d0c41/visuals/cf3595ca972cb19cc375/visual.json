@@ -1,0 +1,202 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "cf3595ca972cb19cc375",
+  "position": {
+    "x": 72.230971128608928,
+    "y": 52.073490813648291,
+    "z": 0,
+    "height": 359.47506561679791,
+    "width": 1135.538057742782,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Dim_Vendedores"
+                    }
+                  },
+                  "Property": "Vendedor"
+                }
+              },
+              "queryRef": "Dim_Vendedores.Vendedor",
+              "nativeQueryRef": "Vendedor",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Dim_Lojas"
+                    }
+                  },
+                  "Property": "Loja (Venda)"
+                }
+              },
+              "queryRef": "Dim_Lojas.Loja (Venda)",
+              "nativeQueryRef": "Loja (Venda)",
+              "active": false
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Tabela"
+                    }
+                  },
+                  "Property": "Volume Ativacoes"
+                }
+              },
+              "queryRef": "Tabela.Volume Ativacoes",
+              "nativeQueryRef": "Volume Ativacoes"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Tabela"
+                    }
+                  },
+                  "Property": "Receita Total"
+                }
+              },
+              "queryRef": "Tabela.Receita Total",
+              "nativeQueryRef": "Receita Total"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Tabela"
+                    }
+                  },
+                  "Property": "Comissao Total"
+                }
+              },
+              "queryRef": "Tabela.Comissao Total",
+              "nativeQueryRef": "Comissao Total"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Tabela"
+                    }
+                  },
+                  "Property": "// Percentual de lucratividade real da operação sobre as vendas% Margem Lucro"
+                }
+              },
+              "queryRef": "Tabela.// Percentual de lucratividade real da operação sobre as vendas% Margem Lucro",
+              "nativeQueryRef": "// Percentual de lucratividade real da operação sobre as vendas% Margem Lucro"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "c39b99743de893d18395",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Dim_Lojas"
+              }
+            },
+            "Property": "Loja (Venda)"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "d61c1ea41a820b373b23",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Dim_Vendedores"
+              }
+            },
+            "Property": "Vendedor"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "1491e000493a4e0c4e95",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Tabela"
+              }
+            },
+            "Property": "Volume Ativacoes"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "092c27c0a7608958ae50",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Tabela"
+              }
+            },
+            "Property": "Receita Total"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "d2286d66edb7047676a6",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Tabela"
+              }
+            },
+            "Property": "Comissao Total"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "9b04ff90adbc8d20d6d5",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Tabela"
+              }
+            },
+            "Property": "// Percentual de lucratividade real da operação sobre as vendas% Margem Lucro"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}
