@@ -10,10 +10,6 @@
 ## 🚀 Sobre o Projeto
 Este repositório contém a solução de Business Intelligence desenvolvida para o Grupo Celnet. O objetivo principal é transformar os dados manuais de ativações celulares em um ecossistema analítico automatizado (*Data-Driven*), focando no controle de descontos, monitoramento de margem de lucro e eficiência no processo de auditoria de vendas.
 
-## 📂 Estrutura do Repositório
-* 📊 `[Cole aqui o nome exato do seu arquivo do Power BI].pbix` (ou `.pbip`) - Arquivo do Dashboard.
-* 📄 `docs/Celnet_Analytics_Documentacao_Final_BI.pdf` - Relatório Técnico e Executivo Oficial do Projeto.
-
 ## 🗂️ Modelagem dos Dados
 O projeto foi estruturado seguindo o modelo **Star Schema (Esquema Estrela)** puro, garantindo integridade e performance ao motor do Power BI:
 * **Tabela Fato:** `Fato_Vendas` (Granularidade por transação de venda, incluindo métricas de margem, custo e o status da auditoria).
